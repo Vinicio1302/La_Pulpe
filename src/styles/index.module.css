@@ -1,45 +1,64 @@
 .main {
   display: flex;
+  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 4rem;
+  padding: 4rem 1rem;
   min-height: 100vh;
   background: linear-gradient(135deg, coral 35%, lightseagreen 65%);
 }
 
+.leftColumn, .rightColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
 .leftColumn {
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 30%; /* Asume el 50% del ancho de la pantalla */
+  max-width: 40%; /* Asume el 50% del ancho de la pantalla */
   height: 750px;
   border-radius: 5%;
   background-color: antiquewhite;
+  padding: 1rem;
+}
+
+.title, .subtitle, .logoLFContainer, .sublowertitle {
+  width: 100%;
+  text-align: center;
+  padding: 1rem 0;
 }
 
 .title {
   display: flex;
   align-items: flex-start;
-  font-size: 5rem;
-  z-index: 2;
+  font-size: 5.5vw;
   font-family: 'Signika Negative', sans-serif; /* Aplica la nueva fuente */
   text-align: center;
   padding: 1rem;
   margin-bottom: 2rem;
-  width: 550px;
+  width: 100%;
+  color: black;
 }
 
 .subtitle {
   display: flex;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.9vw;
   font-family: 'Signika Negative', sans-serif; /* Aplica la nueva fuente */
   text-align: center;
   padding: 2.5rem;
   margin-bottom: 2rem;
   height: 200px; /* Altura del contenedor */
-  width: 550px;
+  width: 100%;
+  color: black;
 }
 
 .logoLFContainer{
@@ -47,7 +66,7 @@
   justify-content: center;
   align-items: flex-end;
   background: transparent;
-  width: 550px;
+  width: 100%;
 }
 
 .logoLF{
@@ -60,29 +79,32 @@
   justify-content: center; /* Centra horizontalmente */
   align-items: flex-end; /* Alinea al fondo verticalmente */
   height: 13px; /* Altura del contenedor */
-  width: 550px;
+  width: 100%;
   padding: 20px; /* Espacio dentro del contenedor */
+  color: black;
+  font-size: 1vw;
 }
 
 .rightColumn {
-  display: flex;
+  flex: 1;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
-  width: 70%; /* Asume el 50% del ancho de la pantalla */
+  width: 60%; /* Asume el 50% del ancho de la pantalla */
   height: 750px;
   border-top-right-radius: 10%;
   border-bottom-right-radius: 10%;
+  padding: 1rem;
 }
 
 .logoContainer {
-  margin-top: auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
   padding: 1rem; /* Espacio alrededor del logo */
   border-radius: 20%;
+  margin-top: auto;
+  margin-bottom: 2rem;
 }
 
 .flipContainer {
@@ -111,16 +133,12 @@
 }
 
 .front {
-  background: white;
-  color: black;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .back {
-  background: gray;
-  color: white;
   transform: rotateY(180deg);
   display: flex;
   align-items: center;
@@ -132,18 +150,21 @@
   flex-direction: row;
   gap: 2rem;
   padding: 1rem;
-  justify-content: center; /* Alinea horizontalmente las cartas */
+  justify-content: space-around; /* Alinea horizontalmente las cartas */
   align-items: center;
   margin-top: auto;
+  flex-wrap: nowrap;
 }
 
 .card {
-  padding: 2rem;
   background: floralwhite;
   border-radius: 100px;
   transition: background 200ms, box-shadow 0.3s ease, filter 0.3s ease;
-  width: 380px;
+  max-width: 60%; /* Asegura dos tarjetas por fila a lo más */
   text-align: center;
+  color: black;
+  margin: 10px;
+  padding: 20px;
 }
 
 .card:hover {
@@ -167,4 +188,40 @@
 .code {
   font-weight: 700;
   font-family: monospace;
+}
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    align-items: center; /* Centra los elementos cuando están apilados */
+  }
+
+  .leftColumn, .rightColumn {
+    width: 100%; /* Los hace ocupar el ancho completo en pantallas pequeñas */
+    height: auto; /* Permite que el contenido defina la altura */
+    align-items: center; /* Asegura que el contenido esté centrado */
+  }
+
+  .title, .subtitle {
+    font-size: calc(1rem + 1.5vw); /* Más pequeño en dispositivos móviles */
+  }
+
+  .logoLF {
+    width: 70%; /* Permite que el logo sea más grande en pantallas pequeñas */
+  }
+
+  .cardsContainer {
+    flex-direction: column; /* Apila las tarjetas verticalmente */
+    align-items: center; /* Centra las tarjetas */
+  }
+
+  .card {
+    max-width: 100%; /* Una tarjeta por fila en pantallas pequeñas */
+  }
+}
+
+@media (min-width: 1024px) {
+  .logoLF {
+    width: 30%; /* Reduce el tamaño del logo en pantallas grandes para evitar que sea demasiado dominante */
+  }
 }

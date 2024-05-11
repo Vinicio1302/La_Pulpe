@@ -66,9 +66,9 @@ export default function Home() {
                 <div className={styles.cardsContainer}>
                     <a href="/login" className={styles.card}>
                         <h2>
-                            Login <span>-&gt;</span>
+                            Log in <span>-&gt;</span>
                         </h2>
-                        <p>Go to login page</p>
+                        <p>Go to log in page</p>
                     </a>
 
                     <a href="/signUp" className={styles.card}>
