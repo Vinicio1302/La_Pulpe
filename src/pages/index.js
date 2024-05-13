@@ -38,31 +38,27 @@ export default function Home() {
                 <div className={styles.flipContainer}>
                     <div className={styles.flipper}>
                         <div className={styles.front}>
-                                <Image
-                                    className={styles.logoContainer}
-                                    src="/lapulpe.png"
-                                    alt="La Pulpe"
-                                    width={500}
-                                    height={500}
-                                    priority
-                                />
+                            <Image
+                                className={styles.logoContainer}
+                                src="/lapulpe.png"
+                                alt="La Pulpe"
+                                width={500}
+                                height={500}
+                                priority
+                            />
                         </div>
                         <div className={styles.back}>
-                            <div className={styles.front}>
-                                <Image
-                                    className={styles.logoContainer}
-                                    src="/lapulpe.png"
-                                    alt="La Pulpe"
-                                    width={500}
-                                    height={500}
-                                    priority
-                                />
-                            </div>
+                            <iframe
+                                src="https://giphy.com/embed/Dg4TxjYikCpiGd7tYs"
+                                width="480"
+                                height="480"
+                                frameBorder="0"
+                                allowFullScreen
+                                className={styles.giphyEmbed}
+                            ></iframe>
                         </div>
                     </div>
                 </div>
-
-
                 <div className={styles.cardsContainer}>
                     <a href="/login" className={styles.card}>
                         <h2>
@@ -70,9 +66,8 @@ export default function Home() {
                         </h2>
                         <p>Go to log in page</p>
                     </a>
-
                     <a href="/signUp" className={styles.card}>
-                    <h2>
+                        <h2>
                             Sign up <span>-&gt;</span>
                         </h2>
                         <p>Go to sign up page</p>

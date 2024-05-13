@@ -45,8 +45,12 @@ export default function Login() {
                 <div className={styles.btnContainer}>
                     <a href="/" className={styles.goBackBtn}>Go back</a>
                 </div>
+                <div className={styles.btnContainer}>
+                    <a href="/catalog" className={styles.goBackBtn}>temp log in catalog</a>
+                </div>
             </form>
         </div>
     );
 }
+
 

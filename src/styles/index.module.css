@@ -97,7 +97,7 @@
   padding: 1rem;
 }
 
-.logoContainer {
+.logoContainer, .giphyEmbed {
   display: flex;
   justify-content: center;
   align-items: center;
