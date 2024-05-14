@@ -5,7 +5,7 @@
     justify-content: space-between;
     padding: 10px;
     min-height: 7vw;
-    background: linear-gradient(135deg, coral 35%, lightseagreen 65%);
+    background: linear-gradient(135deg, #F15B5B 35%, #59C3C3 65%);
 }
 
 .pointsCounter {
@@ -99,7 +99,7 @@
     }
 }
 
-.catalogView, .historyView {
+.historyView {
     padding: 20px;
 }
 
@@ -111,42 +111,92 @@
     background-color: #f9f9f9;
 }
 
-.catalogItem {
+.catalogView{
     display: flex;
-    align-items: center;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Para centrar las tarjetas horizontalmente */
+    gap: 20px; /* Espacio entre las tarjetas */
+    padding: 20px;
+}
+
+.catalogItem {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    background: linear-gradient(-45deg, #001 0%, #29C2C4 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 12px;
+    gap: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    box-sizing: border-box; /* Asegúrate de incluir el relleno y el borde en el ancho y alto */
+}
+
+.catalogItem::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: -5px;
+    margin: auto;
+    width: 410px;
+    height: 610px;
+    border-radius: 10px;
+    background: linear-gradient(-45deg, orangered 0%, midnightblue 100%);
+    z-index: -10;
+    pointer-events: none;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.catalogItem::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(-45deg, #F15B5B 0%, #F9E786 100%);
+    transform: translate3d(0, 0, 0) scale(0.95);
+    filter: blur(20px);
+}
+
+.catalogItem:hover::after {
+    filter: blur(30px);
+}
+
+.catalogItem:hover::before {
+    transform: rotate(-90deg) scaleX(1.49) scaleY(0.68);
 }
 
 .itemImage {
-    width: 100px;
-    height: 100px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     border-radius: 5px;
-    margin-right: 20px;
 }
 
 .itemInfo {
     flex-grow: 1;
+    color: white; /* Ajuste de color para mayor visibilidad */
 }
 
 .itemName {
     margin: 0;
     font-size: 1.2em;
+    font-weight: bold;
 }
 
 .itemDescription {
     margin: 5px 0;
-    color: #666;
+    font-size: 14px;
+    color: white; /* Ajuste de color para mayor visibilidad */
 }
 
 .itemPoints {
-    margin: 0 20px;
+    margin: 0 0 10px 0;
     font-size: 1em;
-    color: green;
+    color: white;
+    font-weight: bolder;
 }
 
 .requestButton {
@@ -158,6 +208,21 @@
     border-radius: 15%;
     cursor: pointer;
     transition: background-color 0.3s ease;
+}
+
+.heading {
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+.card p:not(.heading) {
+    font-size: 14px;
+}
+
+.card p:last-child {
+    color: #e81cff;
+    font-weight: 600;
 }
 
 
