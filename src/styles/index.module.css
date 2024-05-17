@@ -1,110 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend+Tera&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600&display=swap');
+
 .main {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 4rem 1rem;
   min-height: 100vh;
-  background: linear-gradient(135deg, coral 35%, lightseagreen 65%);
+  background: linear-gradient(110deg, lightseagreen 35%, coral 65%);
 }
 
 .leftColumn, .rightColumn {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.leftColumn {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  max-width: 40%; /* Asume el 50% del ancho de la pantalla */
-  height: 750px;
-  border-radius: 5%;
-  background-color: antiquewhite;
+  align-items: center;
+  height: 700px; /* Reduce la altura */
   padding: 1rem;
+  box-sizing: border-box;
+  max-width: 40%; /* Reduce el ancho máximo */
 }
 
-.title, .subtitle, .logoLFContainer, .sublowertitle {
+.leftColumn {
+  background-color: honeydew;
+  padding: 1rem;
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+}
+
+.rightColumn {
+  background-color: wheat;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 5%;
+  border-bottom-right-radius: 5%;
+}
+
+.title, .titlename, .subtitle, .logoLFContainer, .sublowertitle, .cardsContainer {
+  display: flex;
   width: 100%;
   text-align: center;
-  padding: 1rem 0;
+  padding: 0.5rem 0;
+  justify-content: center; /*alinea horizontalmente*/
+  max-height: 17vh;
 }
 
 .title {
-  display: flex;
-  align-items: flex-start;
-  font-size: 5.5vw;
+  align-items: center;
+  font-size: 3.2vw;
   font-family: 'Signika Negative', sans-serif; /* Aplica la nueva fuente */
-  text-align: center;
-  padding: 1rem;
-  margin-bottom: 2rem;
-  width: 100%;
   color: black;
+}
+
+.titlename {
+  color: orangered;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 5vw;
+  font-family: 'Lexend Tera', sans-serif; /* Cambia la fuente solo para el título "LA PULPE" */
+  padding: 0.5rem;
 }
 
 .subtitle {
-  display: flex;
   align-items: center;
-  font-size: 1.9vw;
+  font-size: 1.4vw;
   font-family: 'Signika Negative', sans-serif; /* Aplica la nueva fuente */
   text-align: center;
   padding: 2.5rem;
-  margin-bottom: 2rem;
-  height: 200px; /* Altura del contenedor */
   width: 100%;
   color: black;
 }
 
-.logoLFContainer{
-  display: flex;
+.logoLFContainer {
   justify-content: center;
-  align-items: flex-end;
   background: transparent;
-  width: 100%;
 }
 
-.logoLF{
+.logoLF {
   width: 220px;
-  height: 200px;
 }
 
 .sublowertitle {
-  display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: flex-end; /* Alinea al fondo verticalmente */
-  height: 13px; /* Altura del contenedor */
   width: 100%;
   padding: 20px; /* Espacio dentro del contenedor */
   color: black;
   font-size: 1vw;
 }
 
-.rightColumn {
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 60%; /* Asume el 50% del ancho de la pantalla */
-  height: 750px;
-  border-top-right-radius: 10%;
-  border-bottom-right-radius: 10%;
+.cardsContainer {
+  flex-direction: row;
+  gap: 2rem;
   padding: 1rem;
+  justify-content: space-around; /* Alinea horizontalmente las cartas */
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
-.logoContainer, .giphyEmbed {
+.card {
+  border-radius: 100px;
+  transition: background 200ms, box-shadow 0.3s ease, filter 0.3s ease;
+  text-align: center;
+  color: white;
+  padding: 15px;
+  background: orangered;
+  width: 100%; /* Ajusta el ancho al 100% del contenedor */
+  max-width: 300px; /* Ancho máximo */
+  flex: 0 1 auto; /* Permite que la tarjeta mantenga su tamaño ajustable */
+}
+
+.card:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6); /* Sombra ligera alrededor */
+}
+
+.card h2 {
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.card p {
+  font-family: 'Signika Negative', sans-serif; /* Aplica la nueva fuente */
+  font-size: 1.1rem;
+  line-height: 1.5;
+  max-width: 30ch;
+  text-wrap: balance;
+}
+
+.code {
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.logoContainer{
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem; /* Espacio alrededor del logo */
-  border-radius: 20%;
-  margin-top: auto;
-  margin-bottom: 2rem;
+  border-radius: 5%;
 }
 
 .flipContainer {
@@ -128,66 +161,18 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden; /* Oculta la parte trasera hasta que se rote */
-  border-radius: 30%; /* Opcional: bordes redondeados */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.front {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.back {
+.back{
   transform: rotateY(180deg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.cardsContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 2rem;
-  padding: 1rem;
-  justify-content: space-around; /* Alinea horizontalmente las cartas */
-  align-items: center;
-  margin-top: auto;
-  flex-wrap: nowrap;
-}
-
-.card {
-  background: floralwhite;
-  border-radius: 100px;
-  transition: background 200ms, box-shadow 0.3s ease, filter 0.3s ease;
-  max-width: 60%; /* Asegura dos tarjetas por fila a lo más */
-  text-align: center;
-  color: black;
-  margin: 10px;
-  padding: 20px;
-}
-
-.card:hover {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6); /* Sombra ligera alrededor */
-}
-
-.card h2 {
-  font-weight: 600;
-  margin-bottom: 0.7rem;
-}
-
-.card p {
-  font-family: 'Signika Negative', sans-serif; /* Aplica la nueva fuente */
-  margin: 0;
-  font-size: 1.3rem;
-  line-height: 1.5;
-  max-width: 30ch;
-  text-wrap: balance;
-}
-
-.code {
-  font-weight: 700;
-  font-family: monospace;
+.front img, .back img {
+  border-radius: 30%; /* Opcional: bordes redondeados */
 }
 
 @media (max-width: 768px) {

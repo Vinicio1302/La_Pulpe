@@ -7,7 +7,13 @@ export default function Home() {
             <div className={styles.leftColumn}>
                 <div className={styles.title}>
                     <p>
-                        Welcome to La Pulpe. <br/>
+                        Welcome to<br/>
+                        <code className={styles.code}></code>
+                    </p>
+                </div>
+                <div className={styles.titlename}>
+                    <p>
+                        La Pulpe<br/>
                         <code className={styles.code}></code>
                     </p>
                 </div>
@@ -16,6 +22,20 @@ export default function Home() {
                         Please sign up or login if you already have an account.<br/>
                         <code className={styles.code}></code>
                     </p>
+                </div>
+                <div className={styles.cardsContainer}>
+                    <a href="/login" className={styles.card}>
+                        <h2>
+                            Log in
+                        </h2>
+                        <p>Go to log in page</p>
+                    </a>
+                    <a href="/signUp" className={styles.card}>
+                        <h2>
+                            Sign up
+                        </h2>
+                        <p>Go to sign up page</p>
+                    </a>
                 </div>
                 <div className={styles.logoLFContainer}>
                     <Image
@@ -40,7 +60,7 @@ export default function Home() {
                         <div className={styles.front}>
                             <Image
                                 className={styles.logoContainer}
-                                src="/lapulpe.png"
+                                src="/lapulpe2.webp"
                                 alt="La Pulpe"
                                 width={500}
                                 height={500}
@@ -48,30 +68,16 @@ export default function Home() {
                             />
                         </div>
                         <div className={styles.back}>
-                            <iframe
-                                src="https://giphy.com/embed/Dg4TxjYikCpiGd7tYs"
-                                width="480"
-                                height="480"
-                                frameBorder="0"
-                                allowFullScreen
-                                className={styles.giphyEmbed}
-                            ></iframe>
+                            <Image
+                                className={styles.logoContainer}
+                                src="/lapulpe.png"
+                                alt="La Pulpe"
+                                width={500}
+                                height={500}
+                                priority
+                            />
                         </div>
                     </div>
-                </div>
-                <div className={styles.cardsContainer}>
-                    <a href="/login" className={styles.card}>
-                        <h2>
-                            Log in <span>-&gt;</span>
-                        </h2>
-                        <p>Go to log in page</p>
-                    </a>
-                    <a href="/signUp" className={styles.card}>
-                        <h2>
-                            Sign up <span>-&gt;</span>
-                        </h2>
-                        <p>Go to sign up page</p>
-                    </a>
                 </div>
             </div>
         </main>
