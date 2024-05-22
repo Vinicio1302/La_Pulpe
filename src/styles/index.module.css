@@ -117,7 +117,7 @@
 }
 
 .card:hover {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.6); /* Sombra ligera alrededor */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 32); /* Sombra ligera alrededor */
 }
 
 .card h2 {

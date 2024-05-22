@@ -92,6 +92,7 @@
 .goBackBtn {
     display: inline-block;
     padding: 10px 20px;
+    margin-top: 10px;
     font-size: 16px;
     background-color: grey;
     color: white;
@@ -110,4 +111,7 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Realza la sombra al pasar el mouse */
 }
 
+.error{
+    font-size: 1rem;
+}
 
