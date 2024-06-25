@@ -12,27 +12,8 @@ export default function Login() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        try {
-            const res = await fetch('/api/users/validate', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ username, password }),
-            });
-
-            const data = await res.json();
-
-            if (res.ok) {
-                // Login successful, redirect to catalog
-                await router.push('/catalog');
-            } else {
-                // Login failed, show error message
-                setError(data.error || 'An unexpected error occurred');
-            }
-        } catch (err) {
-            setError('An unexpected error occurred');
-        }
+        // Directly navigate to the catalog page
+        await router.push('/catalog');
     };
 
     return (

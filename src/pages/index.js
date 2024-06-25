@@ -30,12 +30,6 @@ export default function Home() {
                         </h2>
                         <p>Go to log in page</p>
                     </a>
-                    <a href="/signUp" className={styles.card}>
-                        <h2>
-                            Sign up
-                        </h2>
-                        <p>Go to sign up page</p>
-                    </a>
                 </div>
                 <div className={styles.logoLFContainer}>
                     <Image
