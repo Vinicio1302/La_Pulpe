@@ -43,7 +43,7 @@ export default function Home() {
                 </div>
                 <div className={styles.sublowertitle}>
                     <p>
-                        Sponsored by LightForce Orthodontics. <br/>
+                        Sponsored by LightForce Costa Rica. <br/>
                         <code className={styles.code}></code>
                     </p>
                 </div>

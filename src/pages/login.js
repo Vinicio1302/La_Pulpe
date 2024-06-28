@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from '../styles/login.module.css';
+import { useGoogleLogin } from '@react-oauth/google';
+import { loadClient } from '../lib/sheets'; // Importa la biblioteca
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -9,10 +11,38 @@ export default function Login() {
     const [error, setError] = useState('');
     const router = useRouter();
 
+    const handleGoogleLoginSuccess = async (tokenResponse) => {
+        const { code } = tokenResponse;
+        try {
+            const response = await fetch('/api/exchange-token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ code }),
+            });
+            const data = await response.json();
+            const { access_token } = data;
+            // Usar el token de acceso para cargar el cliente
+            loadClient(access_token, '1MVKpqtcpIeiEuQxbyBMBsyixTLGWh08h1HmA9tDu5J8', 'Sheet1!C2:D1000');
+            router.push('/catalog');
+        } catch (error) {
+            console.error('Error exchanging code for token', error);
+        }
+    };
+
+    const login = useGoogleLogin({
+        flow: 'auth-code',
+        onSuccess: handleGoogleLoginSuccess,
+        onError: (errorResponse) => {
+            console.error('Login failed:', errorResponse);
+        },
+        clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+        redirectUri: process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI,
+    });
+
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        // Directly navigate to the catalog page
         await router.push('/catalog');
     };
 
@@ -49,6 +79,7 @@ export default function Login() {
                 <div className={styles.btnContainer}>
                     <a href="/" className={styles.goBackBtn}>Go back</a>
                 </div>
+                <button type="button" onClick={() => login()}>Login with Google</button>
             </form>
         </div>
     );
