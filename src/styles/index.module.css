@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend+Tera&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
 
 .main {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   padding: 4rem 1rem;
   min-height: 100vh;
   background: linear-gradient(110deg, lightseagreen 35%, coral 65%);
@@ -18,10 +16,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 700px; /* Reduce la altura */
   padding: 1rem;
   box-sizing: border-box;
-  max-width: 40%; /* Reduce el ancho máximo */
+  max-width: 40%;
 }
 
 .leftColumn {
@@ -44,14 +41,14 @@
   width: 100%;
   text-align: center;
   padding: 0.5rem 0;
-  justify-content: center; /*alinea horizontalmente*/
-  max-height: 17vh;
+  justify-content: center;
 }
 
 .title {
   align-items: center;
   font-size: 3.2vw;
-  font-family: 'Signika Negative', sans-serif; /* Aplica la nueva fuente */
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   color: black;
 }
 
@@ -61,15 +58,16 @@
   justify-content: center;
   align-items: center;
   font-size: 5vw;
-  font-weight: bolder;
-  font-family: 'Poppins', sans-serif; /* Cambia la fuente solo para el título "LA PULPE" */
+  font-weight: 700;
+  font-family: 'Poppins', sans-serif;
   padding: 0.5rem;
 }
 
 .subtitle {
   align-items: center;
   font-size: 1.4vw;
-  font-family: 'Signika Negative', sans-serif; /* Aplica la nueva fuente */
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   text-align: center;
   padding: 2.5rem;
   width: 100%;
@@ -89,9 +87,11 @@
 
 .sublowertitle {
   width: 100%;
-  padding: 20px; /* Espacio dentro del contenedor */
+  padding: 20px;
   color: black;
   font-size: 1vw;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   margin-top: 1px;
 }
 
@@ -99,7 +99,7 @@
   flex-direction: row;
   gap: 2rem;
   padding: 1rem;
-  justify-content: space-around; /* Alinea horizontalmente las cartas */
+  justify-content: space-around;
   align-items: center;
   flex-wrap: nowrap;
 }
@@ -111,22 +111,24 @@
   color: white;
   padding: 15px;
   background: orangered;
-  width: 100%; /* Ajusta el ancho al 100% del contenedor */
-  max-width: 300px; /* Ancho máximo */
-  flex: 0 1 auto; /* Permite que la tarjeta mantenga su tamaño ajustable */
+  width: 100%;
+  max-width: 300px;
+  flex: 0 1 auto;
 }
 
 .card:hover {
-  box-shadow: 0 0 15px rgba(0, 0, 0, 32); /* Sombra ligera alrededor */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 32);
 }
 
 .card h2 {
   font-weight: 600;
   font-size: 1.6rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .card p {
-  font-family: 'Signika Negative', sans-serif; /* Aplica la nueva fuente */
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
   font-size: 1.1rem;
   line-height: 1.5;
   max-width: 30ch;
@@ -138,15 +140,20 @@
   font-family: monospace;
 }
 
-.logoContainer{
+.logoContainer {
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 5%;
+  width: 100%; /* Mantiene el contenedor al 100% del ancho disponible */
+  max-width: 400px; /* Ajusta este valor para hacer la imagen más pequeña */
+  height: auto;
+  margin: 0 auto; /* Centra el contenedor dentro de su padre */
 }
 
 .flipContainer {
-  perspective: 1000px; /* Permite un efecto 3D al girar */
+  perspective: 1000px;
+  width: 100%;
 }
 
 .flipper {
@@ -158,60 +165,62 @@
 }
 
 .flipper:hover {
-  transform: rotateY(180deg); /* Rota el div para mostrar la parte trasera */
+  transform: rotateY(180deg);
 }
 
 .front, .back {
   position: absolute;
   width: 100%;
   height: 100%;
-  backface-visibility: hidden; /* Oculta la parte trasera hasta que se rote */
+  backface-visibility: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.back{
+.back {
   transform: rotateY(180deg);
 }
 
 .front img, .back img {
-  border-radius: 30%; /* Opcional: bordes redondeados */
+  border-radius: 30%;
+  max-width: 72%; /* Asegura que la imagen no exceda el tamaño del contenedor */
+  height: auto;
 }
 
 @media (max-width: 768px) {
   .main {
     flex-direction: column;
-    align-items: center; /* Centra los elementos cuando están apilados */
+    align-items: center;
   }
 
   .leftColumn, .rightColumn {
-    width: 100%; /* Los hace ocupar el ancho completo en pantallas pequeñas */
-    height: auto; /* Permite que el contenido defina la altura */
-    align-items: center; /* Asegura que el contenido esté centrado */
+    width: 100%;
+    height: auto;
+    align-items: center;
   }
 
   .title, .subtitle {
-    font-size: calc(1rem + 1.5vw); /* Más pequeño en dispositivos móviles */
+    font-size: calc(1rem + 1.5vw);
   }
 
   .logoLF {
-    width: 70%; /* Permite que el logo sea más grande en pantallas pequeñas */
+    width: 70%;
   }
 
   .cardsContainer {
-    flex-direction: column; /* Apila las tarjetas verticalmente */
-    align-items: center; /* Centra las tarjetas */
+    flex-direction: column;
+    align-items: center;
   }
 
   .card {
-    max-width: 100%; /* Una tarjeta por fila en pantallas pequeñas */
+    max-width: 100%;
   }
 }
 
 @media (min-width: 1024px) {
   .logoLF {
-    width: 30%; /* Reduce el tamaño del logo en pantallas grandes para evitar que sea demasiado dominante */
+    width: 30%;
   }
 }

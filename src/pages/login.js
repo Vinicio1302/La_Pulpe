@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from '../styles/login.module.css';
 import { useGoogleLogin } from '@react-oauth/google';
-import { loadClient } from '../lib/sheets'; // Importa la biblioteca
+import { loadClient } from '@/lib/sheets'; // Importa la biblioteca
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -75,11 +75,11 @@ export default function Login() {
                     required
                 />
                 <button type="submit">Log In</button>
+                <button type="button" onClick={() => login()}>Login with Google</button>
                 {error && <p className={styles.error}>{error}</p>}
                 <div className={styles.btnContainer}>
                     <a href="/" className={styles.goBackBtn}>Go back</a>
                 </div>
-                <button type="button" onClick={() => login()}>Login with Google</button>
             </form>
         </div>
     );

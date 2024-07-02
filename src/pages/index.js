@@ -1,7 +1,28 @@
+import { useEffect } from "react";
 import Image from "next/image";
 import styles from "../styles/index.module.css";
 
 export default function Home() {
+    useEffect(() => {
+        const leftColumn = document.querySelector(`.${styles.leftColumn}`);
+        const rightColumn = document.querySelector(`.${styles.rightColumn}`);
+
+        function setEqualHeight() {
+            const leftHeight = leftColumn.offsetHeight;
+            rightColumn.style.height = `${leftHeight}px`;
+        }
+
+        // Set the height initially
+        setEqualHeight();
+
+        // Adjust the height on window resize
+        window.addEventListener('resize', setEqualHeight);
+
+        return () => {
+            window.removeEventListener('resize', setEqualHeight);
+        };
+    }, []);
+
     return (
         <main className={styles.main}>
             <div className={styles.leftColumn}>
@@ -19,7 +40,7 @@ export default function Home() {
                 </div>
                 <div className={styles.subtitle}>
                     <p>
-                        Please sign up or login if you already have an account.<br/>
+                        Please login with your account to access the catalog<br/>
                         <code className={styles.code}></code>
                     </p>
                 </div>
@@ -43,7 +64,7 @@ export default function Home() {
                 </div>
                 <div className={styles.sublowertitle}>
                     <p>
-                        Sponsored by LightForce Costa Rica. <br/>
+                        Sponsored by LightForce Costa Rica <br/>
                         <code className={styles.code}></code>
                     </p>
                 </div>
