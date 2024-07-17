@@ -1,230 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 .main {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6rem;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 4rem 1rem;
   min-height: 100vh;
+  background: linear-gradient(110deg, lightseagreen 35%, coral 65%);
 }
 
-.description {
-  display: inherit;
-  justify-content: inherit;
-  align-items: inherit;
-  font-size: 0.85rem;
-  max-width: var(--max-width);
-  width: 100%;
-  z-index: 2;
-  font-family: var(--font-mono);
-}
-
-.description a {
+.leftColumn, .rightColumn {
+  flex: 1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
-}
-
-.description p {
-  position: relative;
-  margin: 0;
   padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  border-radius: var(--border-radius);
+  box-sizing: border-box;
+  max-width: 40%;
 }
 
-.code {
+.leftColumn {
+  background-color: honeydew;
+  padding: 1rem;
+  border-top-left-radius: 5%;
+  border-bottom-left-radius: 5%;
+}
+
+.rightColumn {
+  background-color: wheat;
+  justify-content: center;
+  align-items: center;
+  border-top-right-radius: 5%;
+  border-bottom-right-radius: 5%;
+}
+
+.title, .titlename, .subtitle, .logoLFContainer, .sublowertitle, .cardsContainer {
+  display: flex;
+  width: 100%;
+  text-align: center;
+  padding: 0.5rem 0;
+  justify-content: center;
+}
+
+.title {
+  align-items: center;
+  font-size: 3.2vw;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  color: black;
+}
+
+.titlename {
+  color: orangered;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  font-size: 5vw;
   font-weight: 700;
-  font-family: var(--font-mono);
+  font-family: 'Poppins', sans-serif;
+  padding: 0.5rem;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(25%, auto));
-  max-width: 100%;
-  width: var(--max-width);
+.subtitle {
+  align-items: center;
+  font-size: 1.4vw;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  text-align: center;
+  padding: 2.5rem;
+  width: 100%;
+  color: black;
+}
+
+.logoLFContainer {
+  justify-content: center;
+  background: transparent;
+}
+
+.logoLF {
+  width: 220px;
+  height: auto;
+  min-height: 130px;
+}
+
+.sublowertitle {
+  width: 100%;
+  padding: 20px;
+  color: black;
+  font-size: 1vw;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  margin-top: 1px;
+}
+
+.cardsContainer {
+  flex-direction: row;
+  gap: 2rem;
+  padding: 1rem;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: nowrap;
 }
 
 .card {
-  padding: 1rem 1.2rem;
-  border-radius: var(--border-radius);
-  background: rgba(var(--card-rgb), 0);
-  border: 1px solid rgba(var(--card-border-rgb), 0);
-  transition: background 200ms, border 200ms;
+  border-radius: 100px;
+  transition: background 200ms, box-shadow 0.3s ease, filter 0.3s ease;
+  text-align: center;
+  color: white;
+  padding: 15px;
+  background: orangered;
+  width: 100%;
+  max-width: 300px;
+  flex: 0 1 auto;
 }
 
-.card span {
-  display: inline-block;
-  transition: transform 200ms;
+.card:hover {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 32);
 }
 
 .card h2 {
   font-weight: 600;
-  margin-bottom: 0.7rem;
+  font-size: 1.6rem;
+  font-family: 'Poppins', sans-serif;
 }
 
 .card p {
-  margin: 0;
-  opacity: 0.6;
-  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 1.1rem;
   line-height: 1.5;
   max-width: 30ch;
   text-wrap: balance;
 }
 
-.center {
+.code {
+  font-weight: 700;
+  font-family: monospace;
+}
+
+.logoContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5%;
+  width: 100%; /* Mantiene el contenedor al 100% del ancho disponible */
+  max-width: 400px; /* Ajusta este valor para hacer la imagen más pequeña */
+  height: auto;
+  margin: 0 auto; /* Centra el contenedor dentro de su padre */
+}
+
+.flipContainer {
+  perspective: 1000px;
+  width: 100%;
+}
+
+.flipper {
   position: relative;
-  padding: 4rem 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
 }
 
-.center::before {
-  background: var(--secondary-glow);
-  border-radius: 50%;
-  width: 480px;
-  height: 360px;
-  margin-left: -400px;
+.flipper:hover {
+  transform: rotateY(180deg);
 }
 
-.center::after {
-  background: var(--primary-glow);
-  width: 240px;
-  height: 180px;
-  z-index: -1;
-}
-
-.center::before,
-.center::after {
-  content: "";
-  left: 50%;
+.front, .back {
   position: absolute;
-  filter: blur(45px);
-  transform: translateZ(0);
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.logo {
-  position: relative;
-}
-/* Enable hover only on non-touch devices */
-@media (hover: hover) and (pointer: fine) {
-  .card:hover {
-    background: rgba(var(--card-rgb), 0.1);
-    border: 1px solid rgba(var(--card-border-rgb), 0.15);
-  }
-
-  .card:hover span {
-    transform: translateX(4px);
-  }
+.back {
+  transform: rotateY(180deg);
 }
 
-@media (prefers-reduced-motion) {
-  .card:hover span {
-    transform: none;
-  }
+.front img, .back img {
+  border-radius: 30%;
+  max-width: 72%; /* Asegura que la imagen no exceda el tamaño del contenedor */
+  height: auto;
 }
 
-/* Mobile */
-@media (max-width: 700px) {
-  .content {
-    padding: 4rem;
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .grid {
-    grid-template-columns: 1fr;
-    margin-bottom: 120px;
-    max-width: 320px;
-    text-align: center;
+  .leftColumn, .rightColumn {
+    width: 100%;
+    height: auto;
+    align-items: center;
+  }
+
+  .title, .subtitle {
+    font-size: calc(1rem + 1.5vw);
+  }
+
+  .logoLF {
+    width: 70%;
+  }
+
+  .cardsContainer {
+    flex-direction: column;
+    align-items: center;
   }
 
   .card {
-    padding: 1rem 2.5rem;
-  }
-
-  .card h2 {
-    margin-bottom: 0.5rem;
-  }
-
-  .center {
-    padding: 8rem 0 6rem;
-  }
-
-  .center::before {
-    transform: none;
-    height: 300px;
-  }
-
-  .description {
-    font-size: 0.8rem;
-  }
-
-  .description a {
-    padding: 1rem;
-  }
-
-  .description p,
-  .description div {
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    width: 100%;
-  }
-
-  .description p {
-    align-items: center;
-    inset: 0 0 auto;
-    padding: 2rem 1rem 1.4rem;
-    border-radius: 0;
-    border: none;
-    border-bottom: 1px solid rgba(var(--callout-border-rgb), 0.25);
-    background: linear-gradient(
-      to bottom,
-      rgba(var(--background-start-rgb), 1),
-      rgba(var(--callout-rgb), 0.5)
-    );
-    background-clip: padding-box;
-    backdrop-filter: blur(24px);
-  }
-
-  .description div {
-    align-items: flex-end;
-    pointer-events: none;
-    inset: auto 0 0;
-    padding: 2rem;
-    height: 200px;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      rgb(var(--background-end-rgb)) 40%
-    );
-    z-index: 1;
+    max-width: 100%;
   }
 }
 
-/* Tablet and Smaller Desktop */
-@media (min-width: 701px) and (max-width: 1120px) {
-  .grid {
-    grid-template-columns: repeat(2, 50%);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .vercelLogo {
-    filter: invert(1);
-  }
-
-  .logo {
-    filter: invert(1) drop-shadow(0 0 0.3rem #ffffff70);
-  }
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
+@media (min-width: 1024px) {
+  .logoLF {
+    width: 30%;
   }
 }
