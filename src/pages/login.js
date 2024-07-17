@@ -1,25 +1,47 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import styles from '../styles/login.module.css';
 
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const router = useRouter();
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log('Login submitted for', username, 'with password', password);
+
+        try {
+            const response = await fetch('/api/authenticate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Invalid username or password');
+            }
+
+            const data = await response.json();
+            console.log('Login response:', data);
+            // Redirige a la página de catálogo después del inicio de sesión exitoso, enviando el nombre de usuario
+            router.push(`/catalog?username=${encodeURIComponent(username)}`);
+        } catch (error) {
+            console.error('Error during login:', error);
+            setErrorMessage('Invalid username or password'); // Mensaje de error
+        }
     };
 
     return (
         <div className={styles.loginContainer}>
             <Head>
                 <title>Login</title>
-                {/* Importa la fuente deseada aquí */}
                 <link rel="preconnect" href="https://fonts.googleapis.com"/>
                 <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous"/>
-                <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600&display=swap"
-                      rel="stylesheet"/>
+                <link href="https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600&display=swap" rel="stylesheet"/>
             </Head>
             <div className={styles.loginImageContainer}>
                 <img src="/lapulpe.png" alt="lapulpe" className={styles.loginImage} />
@@ -42,6 +64,7 @@ export default function Login() {
                     required
                 />
                 <button type="submit">Log In</button>
+                {errorMessage && <p className={styles.errorMsg}>{errorMessage}</p>} {/*Muestra el mensaje de error si existe */}
                 <div className={styles.btnContainer}>
                     <a href="/" className={styles.goBackBtn}>Go back</a>
                 </div>
@@ -49,4 +72,3 @@ export default function Login() {
         </div>
     );
 }
-
