@@ -1,5 +1,4 @@
 /* login.module.css */
-@import "https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600&display=swap";
 
 .loginContainer {
     display: flex;
@@ -7,7 +6,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(110deg, lightseagreen 35%, coral 65%);
+    background: linear-gradient(135deg, coral 35%, lightseagreen 65%);
     font-family: 'Signika Negative', sans-serif; /* Aplica la nueva fuente */
 }
 
@@ -92,7 +91,6 @@
 .goBackBtn {
     display: inline-block;
     padding: 10px 20px;
-    margin-top: 10px;
     font-size: 16px;
     background-color: grey;
     color: white;
@@ -111,7 +109,4 @@
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Realza la sombra al pasar el mouse */
 }
 
-.error{
-    font-size: 1rem;
-}
 
