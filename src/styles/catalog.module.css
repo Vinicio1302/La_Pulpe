@@ -232,4 +232,22 @@
     font-weight: 600;
 }
 
+.errorMessage {
+    color: red;
+    font-size: 1.5em;;
+    position: absolute;
+    top: 92%; /* Ubica el mensaje verticalmente en el centro del contenedor */
+    left: 50%; /* Ubica el mensaje horizontalmente en el centro del contenedor */
+    transform: translate(-50%, -100%); /* Ajusta el mensaje para que esté centrado sobre el botón */
+    
+}
 
+.successMessage  {
+    color: rgb(0, 255, 234);
+    font-size: 1.5em;;
+    position: absolute;
+    top: 92%; /* Ubica el mensaje verticalmente en el centro del contenedor */
+    left: 50%; /* Ubica el mensaje horizontalmente en el centro del contenedor */
+    transform: translate(-50%, -100%); /* Ajusta el mensaje para que esté centrado sobre el botón */
+    
+}
