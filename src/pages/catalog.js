@@ -9,6 +9,7 @@ const Catalog = () => {
     const [errorMessages, setErrorMessages] = useState({});
     const [successMessages, setSuccessMessages] = useState({});
     const [history, setHistory] = useState([]);
+    const [items, setItems] = useState([]);
 
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -20,6 +21,25 @@ const Catalog = () => {
             fetchUserPoints(user);
             fetchUserHistory(user);
         }
+
+        // Fetch items from the inventory API
+        const fetchItems = async () => {
+            try {
+                const response = await fetch('/api/inventory', {
+                    method: 'GET',
+                });
+                const data = await response.json();
+                if (data.success) {
+                    setItems(data.items);
+                } else {
+                    console.error('Error fetching items:', data.message);
+                }
+            } catch (error) {
+                console.error('Error fetching items:', error);
+            }
+        };
+
+        fetchItems();
     }, []);
 
     const fetchUserPoints = async (username) => {
@@ -106,22 +126,6 @@ const Catalog = () => {
         }
     };
 
-    const items = [
-        { id: 1, name: 'Backpack', description: 'Item description 1', points: 3000, image: '/Backpack.png' },
-        { id: 2, name: 'Baseball Cap', description: 'Item description 2', points: 200, image: '/Baseball cap.png' },
-        { id: 3, name: 'Bluetooth Speaker', description: 'Item description 3', points: 4000, image: '/Bluetooth Speaker.png' },
-        { id: 4, name: 'Cooler', description: 'Item description 4', points: 100, image: '/Cooler.png' },
-        { id: 5, name: 'Cotton Socks', description: 'Item description 5', points: 200, image: '/Cotton Socks.png' },
-        { id: 6, name: 'Dry Sack Backpack', description: 'Item description 6', points: 300, image: '/Dry Sack Backpack.png' },
-        { id: 7, name: 'Dual Folding Cellphone Stand', description: 'Item description 7', points: 100, image: '/Dual Folding Cell Phone Stand.png' },
-        { id: 8, name: 'Fanny Pack', description: 'Item description 8', points: 200, image: '/Fanny Pack.png' },
-        { id: 9, name: 'Fast Charging Portable Phone Power Bank', description: 'Item description 9', points: 300, image: '/Fast Charging Portable Phone Power Bank.png' },
-        { id: 10, name: 'Insulated Mugs', description: 'Item description 10', points: 100, image: '/Insulated Mugs.png' },
-        { id: 11, name: 'Jacket', description: 'Item description 11', points: 200, image: '/Jacket.png' },
-        { id: 12, name: 'Portable Fan', description: 'Item description 12', points: 300, image: '/Portable Fan.png' },
-        { id: 13, name: 'Travel Mug', description: 'Item description 13', points: 100, image: '/Travel Mug.png' },
-    ];
-
     const handleButtonClick = (itemId, itemPoints, itemName) => {
         if (userPoints >= itemPoints) {
             setErrorMessages(prev => ({ ...prev, [itemId]: '' })); // Clear error message
@@ -206,15 +210,26 @@ const Catalog = () => {
                 <div className={styles.historyView}>
                     <h2>History View</h2>
                     {history.length > 0 ? (
-                        <ul>
-                            {history.map((entry, index) => (
-                                <li key={index}>
-                                    <p>Item: {entry.itemName}</p>
-                                    <p>Points Spent: {entry.itemPoints}</p>
-                                    <p>Date: {new Date(entry.date).toLocaleDateString()}</p>
-                                </li>
-                            ))}
-                        </ul>
+                        <table className={styles.historyTable}>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Points Spent</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {history.map((entry, index) => (
+                                    <tr key={index}>
+                                        <td>{entry.itemName}</td>
+                                        <td>{entry.itemPoints}</td>
+                                        <td>{new Date(entry.date).toLocaleDateString()}</td>
+                                        <td>{entry.status}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     ) : (
                         <p>No history available.</p>
                     )}

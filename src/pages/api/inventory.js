@@ -10,18 +10,16 @@ async function authenticateSheets() {
 }
 
 export default async (req, res) => {
-    if (req.method !== 'POST') {
-        return res.status(405).send({ message: 'Only POST requests allowed' });
+    if (req.method !== 'GET') {
+        return res.status(405).send({ message: 'Only GET requests allowed' });
     }
-
-    const { username } = req.body;
 
     try {
         const auth = await authenticateSheets();
         const sheets = google.sheets({ version: 'v4', auth });
 
         const spreadsheetId = '1MVKpqtcpIeiEuQxbyBMBsyixTLGWh08h1HmA9tDu5J8';
-        const range = 'User list!A2:E'; 
+        const range = 'Inventory!A2:F'; // Ajusta el rango si es necesario
 
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId,
@@ -29,20 +27,25 @@ export default async (req, res) => {
         });
 
         const rows = response.data.values;
-        if (!rows) {
+        if (!rows || rows.length === 0) {
             throw new Error('No data found in spreadsheet');
         }
 
-        const user = rows.find(row => row[2] === username);
+        const items = rows
+            .map(row => ({
+                id: row[0],
+                name: row[1],
+                description: row[2],
+                points: parseInt(row[3], 10),
+                image: row[4],
+                quantity: parseInt(row[5], 10),
+            }))
+            .filter(item => item.quantity > 0);
 
-        if (user) {
-            const points = parseInt(user[4], 10);
-            res.status(200).json({ success: true, points });
-        } else {
-            res.status(401).json({ success: false, message: 'User not found' });
-        }
+        res.status(200).json({ success: true, items });
     } catch (error) {
         console.error('Error during authentication:', error);
         res.status(500).json({ success: false, message: error.message });
     }
 };
+

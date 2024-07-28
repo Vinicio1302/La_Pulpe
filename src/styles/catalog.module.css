@@ -101,7 +101,7 @@
     animation: shine 6s linear infinite;
 }
 @keyframes shine {
-    to{
+    to {
         background-position: 200% center;
     }
 }
@@ -110,7 +110,7 @@
     padding: 20px;
 }
 
-.historyItem{
+.historyItem {
     border: 1px solid #ccc;
     padding: 10px;
     margin: 10px 0;
@@ -118,7 +118,7 @@
     background-color: #f9f9f9;
 }
 
-.catalogView{
+.catalogView {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around; /* Para centrar las tarjetas horizontalmente */
@@ -234,20 +234,44 @@
 
 .errorMessage {
     color: red;
-    font-size: 1.5em;;
+    font-size: 1.5em;
     position: absolute;
     top: 92%; /* Ubica el mensaje verticalmente en el centro del contenedor */
     left: 50%; /* Ubica el mensaje horizontalmente en el centro del contenedor */
     transform: translate(-50%, -100%); /* Ajusta el mensaje para que esté centrado sobre el botón */
-    
 }
 
-.successMessage  {
+.successMessage {
     color: rgb(0, 255, 234);
-    font-size: 1.5em;;
+    font-size: 1.5em;
     position: absolute;
     top: 92%; /* Ubica el mensaje verticalmente en el centro del contenedor */
     left: 50%; /* Ubica el mensaje horizontalmente en el centro del contenedor */
     transform: translate(-50%, -100%); /* Ajusta el mensaje para que esté centrado sobre el botón */
-    
+}
+
+/* History Styles */
+.historyTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.historyTable th,
+.historyTable td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.historyTable th {
+    background-color: rgb(40, 188, 191);
+    color: white;
+}
+
+.historyTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.historyTable tr:hover {
+    background-color: #ddd;
 }

@@ -14,7 +14,7 @@ export default async (req, res) => {
         return res.status(405).send({ message: 'Only POST requests allowed' });
     }
 
-    const { username, newPoints, itemName, itemPoints } = req.body; // Añade itemName y itemCost
+    const { username, newPoints, itemName, itemPoints } = req.body;
 
     try {
         const auth = await authenticateSheets();
@@ -23,7 +23,7 @@ export default async (req, res) => {
         const spreadsheetId = '1MVKpqtcpIeiEuQxbyBMBsyixTLGWh08h1HmA9tDu5J8';
 
         // Actualizar puntos del usuario
-        const pointsRange = 'Points per user!A2:C';
+        const pointsRange = 'User list!A2:E';
         const pointsResponse = await sheets.spreadsheets.values.get({
             spreadsheetId,
             range: pointsRange,
@@ -34,7 +34,7 @@ export default async (req, res) => {
             return res.status(404).json({ success: false, message: 'No data found in spreadsheet' });
         }
 
-        const rowIndex = rows.findIndex(row => row[1] === username);
+        const rowIndex = rows.findIndex(row => row[2] === username);
         if (rowIndex === -1) {
             return res.status(404).json({ success: false, message: 'User not found ' + username });
         }
@@ -44,10 +44,41 @@ export default async (req, res) => {
         // Actualizar puntos del usuario
         await sheets.spreadsheets.values.update({
             spreadsheetId,
-            range: `Points per user!C${rowNumber}`,
+            range: `User list!E${rowNumber}`,
             valueInputOption: 'RAW',
             resource: {
                 values: [[newPoints]]
+            },
+        });
+
+        // Actualizar el inventario
+        const inventoryRange = 'Inventory!A2:F';
+        const inventoryResponse = await sheets.spreadsheets.values.get({
+            spreadsheetId,
+            range: inventoryRange,
+        });
+
+        const rows_inventory = inventoryResponse.data.values;
+        if (!rows_inventory || rows_inventory.length === 0) {
+            return res.status(404).json({ success: false, message: 'No data found in spreadsheet' });
+        }
+
+        const rowIndex_inventory = rows_inventory.findIndex(row => row[1] === itemName);
+        if (rowIndex_inventory === -1) {
+            return res.status(404).json({ success: false, message: 'Item not found ' + itemName });
+        }
+
+        const rowNumber_inventory = rowIndex_inventory + 2; // Ajuste para encabezado y 0-indexing
+        const currentInventory = parseInt(rows_inventory[rowIndex_inventory][5], 10); // Obtener la cantidad actual de inventario
+        const newInventory = currentInventory - 1; // Restar uno al inventario actual
+
+        // Actualizar el inventario del artículo
+        await sheets.spreadsheets.values.update({
+            spreadsheetId,
+            range: `Inventory!F${rowNumber_inventory}`,
+            valueInputOption: 'RAW',
+            resource: {
+                values: [[newInventory]]
             },
         });
 
