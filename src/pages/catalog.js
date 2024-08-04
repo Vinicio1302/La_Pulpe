@@ -10,9 +10,11 @@ const Catalog = () => {
     const [successMessages, setSuccessMessages] = useState({});
     const [history, setHistory] = useState([]);
     const [items, setItems] = useState([]);
+    const [newPassword, setNewPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordError, setPasswordError] = useState('');
 
     useEffect(() => {
-        // Recupera el nombre de usuario del sessionStorage
         const storedUsername = sessionStorage.getItem('username');
         if (storedUsername) {
             setUsername(storedUsername);
@@ -20,9 +22,6 @@ const Catalog = () => {
             setName(formattedName);
             fetchUserPoints(storedUsername);
             fetchUserHistory(storedUsername);
-        } else {
-            // Redirige a la página de inicio de sesión si no hay nombre de usuario
-            window.location.href = '/';
         }
 
         // Fetch items from the inventory API
@@ -148,6 +147,37 @@ const Catalog = () => {
         }
     };
 
+    const handleProfileUpdate = async (event) => {
+        event.preventDefault();
+
+        if (newPassword !== confirmPassword) {
+            setPasswordError('Passwords do not match');
+            return;
+        }
+
+        try {
+            const response = await fetch('/api/update-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, newPassword }),
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                setSuccessMessages(prev => ({ ...prev, profile: 'Password updated successfully!' }));
+                setNewPassword('');
+                setConfirmPassword('');
+                setPasswordError('');
+            } else {
+                console.error('Error updating password:', data.message);
+            }
+        } catch (error) {
+            console.error('Error updating password:', error);
+        }
+    };
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
@@ -181,10 +211,16 @@ const Catalog = () => {
                     >
                         History
                     </button>
+                    <button
+                        onClick={() => setView('profile')}
+                        className={view === 'profile' ? styles.active : ''}
+                    >
+                        Profile
+                    </button>
                 </div>
             </div>
 
-            {view === 'catalog' ? (
+            {view === 'catalog' && (
                 <div className={styles.catalogView}>
                     {items.map(item => (
                         <div key={item.id} className={styles.catalogItem}>
@@ -209,7 +245,9 @@ const Catalog = () => {
                         </div>
                     ))}
                 </div>
-            ) : (
+            )}
+
+            {view === 'history' && (
                 <div className={styles.historyView}>
                     <h2>History View</h2>
                     {history.length > 0 ? (
@@ -236,6 +274,40 @@ const Catalog = () => {
                     ) : (
                         <p>No history available.</p>
                     )}
+                </div>
+            )}
+
+            {view === 'profile' && (
+                <div className={styles.profileView}>
+                    <form onSubmit={handleProfileUpdate} className={styles.profileForm}>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="newPassword">New Password:</label>
+                            <input
+                                type="password"
+                                id="newPassword"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className={styles.formGroup}>
+                            <label htmlFor="confirmPassword">Confirm Password:</label>
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                            />
+                        </div>
+                        {passwordError && (
+                            <p className={styles.errorMessage2}>{passwordError}</p>
+                        )}
+                        {successMessages.profile && (
+                        <p className={styles.successMessage2}>{successMessages.profile}</p>
+                        )}
+                        <button className={styles.profileButton} type="submit">Update Password</button>
+                    </form>
                 </div>
             )}
         </div>
