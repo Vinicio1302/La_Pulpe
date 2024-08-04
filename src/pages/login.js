@@ -27,8 +27,12 @@ export default function Login() {
 
             const data = await response.json();
             console.log('Login response:', data);
-            // Redirige a la página de catálogo después del inicio de sesión exitoso, enviando el nombre de usuario
-            router.push(`/catalog?username=${encodeURIComponent(username)}`);
+            
+            // Almacena el nombre de usuario en sessionStorage
+            sessionStorage.setItem('username', username);
+            
+            // Redirige a la página de catálogo
+            router.push('/catalog');
         } catch (error) {
             console.error('Error during login:', error);
             setErrorMessage('Invalid username or password'); // Mensaje de error

@@ -12,14 +12,17 @@ const Catalog = () => {
     const [items, setItems] = useState([]);
 
     useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const user = urlParams.get('username');
-        if (user) {
-            setUsername(user);
-            const formattedName = formatUsername(user);
+        // Recupera el nombre de usuario del sessionStorage
+        const storedUsername = sessionStorage.getItem('username');
+        if (storedUsername) {
+            setUsername(storedUsername);
+            const formattedName = formatUsername(storedUsername);
             setName(formattedName);
-            fetchUserPoints(user);
-            fetchUserHistory(user);
+            fetchUserPoints(storedUsername);
+            fetchUserHistory(storedUsername);
+        } else {
+            // Redirige a la página de inicio de sesión si no hay nombre de usuario
+            window.location.href = '/';
         }
 
         // Fetch items from the inventory API
