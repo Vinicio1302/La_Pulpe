@@ -22,6 +22,8 @@ const Catalog = () => {
             setName(formattedName);
             fetchUserPoints(storedUsername);
             fetchUserHistory(storedUsername);
+        }else {
+            window.location.href = '/';
         }
 
         // Fetch items from the inventory API
