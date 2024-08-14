@@ -1,0 +1,331 @@
+/* catalog.module.css */
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600&display=swap');
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    min-height: 7vw;
+    background: linear-gradient(0deg, #001 0%, #29C2C4 100%);
+    border: 2px solid black;
+}
+
+.username {
+    text-align: center;
+    font-size: 1.5em;
+    color: whitesmoke;
+    margin-bottom: 10px;
+}
+
+.pointsCounter {
+    text-align: center;
+    font-size: 1.5em;
+    color: whitesmoke;
+    margin-bottom: 10px;
+}
+
+.viewSwitcher button {
+    display: flow;
+    padding: 12px;
+    background-color: #eee;
+    color: black;
+    cursor: pointer;
+    width: 100%;
+    margin-right: 50px;
+    border: none;
+    border-radius: 5%;
+}
+
+.viewSwitcher button.active {
+    background-color: #333652;
+    color: white;
+}
+
+.view {
+    display: none;
+}
+
+.view.active {
+    display: block;
+}
+
+.btnContainer {
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    margin-left: 10px;
+    margin-top: 5.3vw;
+}
+
+.goBackBtn {
+    display: flex;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    background-color: grey;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: 'Signika Negative', sans-serif;
+}
+
+.goBackBtn:hover {
+    background-color: darkred;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.anuncio {
+    display: flex;
+    justify-content: center; /*alinea horizontalmente*/
+    align-items: center; /*Alinea verticalmente*/
+    font-family: 'Signika Negative', sans-serif; /* Aplica la fuente Hubby Bunny */
+    max-width: 600px;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+    margin: 20px auto;
+}
+
+.texto {
+    font-size: 5rem;
+    background: linear-gradient(to right, darkorange 20%, #5AC9C9 40%, #EDC448 60%, #FD6868 80%, #5AC9C9 100%);
+    background-size: 200%;
+    color: transparent;
+    background-clip: text;
+    animation: shine 6s linear infinite;
+}
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+.historyView {
+    padding: 20px;
+}
+
+.historyItem {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.catalogView {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around; /* Para centrar las tarjetas horizontalmente */
+    gap: 20px; /* Espacio entre las tarjetas */
+    padding: 20px;
+}
+
+.catalogItem {
+    position: relative;
+    width: 400px;
+    height: 600px;
+    background: linear-gradient(-45deg, #001 0%, #29C2C4 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    padding: 12px;
+    gap: 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    box-sizing: border-box; /* Asegúrate de incluir el relleno y el borde en el ancho y alto */
+}
+
+.catalogItem::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    left: -5px;
+    margin: auto;
+    width: 410px;
+    height: 610px;
+    border-radius: 10px;
+    background: linear-gradient(-45deg, #EDC448 0%, #FD6868 100%);
+    z-index: -10;
+    pointer-events: none;
+    transition: all 0.5s cubic-bezier(0.175, 0.6, 0.32, 1.1);
+}
+
+.catalogItem::after {
+    content: "";
+    z-index: -1;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(-45deg, #F15B5B 0%, #F9E786 100%);
+    transform: translate3d(0, 0, 0) scale(0.95);
+    filter: blur(20px);
+}
+
+.catalogItem:hover::after {
+    filter: blur(30px);
+}
+
+.catalogItem:hover::before {
+    transform: rotate(-90deg) scaleX(1.49) scaleY(0.68);
+}
+
+.itemImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.itemInfo {
+    flex-grow: 1;
+    color: white; /* Ajuste de color para mayor visibilidad */
+}
+
+.itemName {
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.itemDescription {
+    margin: 5px 0;
+    font-size: 14px;
+    color: white; /* Ajuste de color para mayor visibilidad */
+}
+
+.itemPoints {
+    margin: 0 0 10px 0;
+    font-size: 1em;
+    color: white;
+    font-weight: bolder;
+}
+
+.requestButton {
+    padding: 10px 20px;
+    border: none;
+    background-color: #007bff; /* Light blue */
+    color: white;
+    font-weight: bold;
+    border-radius: 15%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.heading {
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: 700;
+}
+
+.card p:not(.heading) {
+    font-size: 14px;
+}
+
+.card p:last-child {
+    color: #e81cff;
+    font-weight: 600;
+}
+
+.errorMessage {
+    color: red;
+    font-size: 1.5em;
+    position: absolute;
+    top: 92%; /* Ubica el mensaje verticalmente en el centro del contenedor */
+    left: 50%; /* Ubica el mensaje horizontalmente en el centro del contenedor */
+    transform: translate(-50%, -100%); /* Ajusta el mensaje para que esté centrado sobre el botón */
+}
+
+.successMessage {
+    color: rgb(0, 255, 234);
+    font-size: 1.5em;
+    position: absolute;
+    top: 92%; /* Ubica el mensaje verticalmente en el centro del contenedor */
+    left: 50%; /* Ubica el mensaje horizontalmente en el centro del contenedor */
+    transform: translate(-50%, -100%); /* Ajusta el mensaje para que esté centrado sobre el botón */
+}
+
+/* History Styles */
+.historyTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.historyTable th,
+.historyTable td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.historyTable th {
+    background-color: rgb(40, 188, 191);
+    color: white;
+}
+
+.historyTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.historyTable tr:hover {
+    background-color: #ddd;
+}
+
+/*Password*/
+.profileButton {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor en forma de mano */
+    margin-top: 20px; /* Espacio superior */
+}
+
+.profileForm {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submitButton {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor en forma de mano */
+}
+
+.errorMessage2 {
+    color: red;
+    margin-top: 10px;
+}
+
+.successMessage2 {
+    color: green;
+    margin-top: 10px;
+}
