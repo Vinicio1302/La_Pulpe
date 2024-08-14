@@ -16,7 +16,7 @@ async function testSheetsAPI() {
 
         const response = await sheets.spreadsheets.values.get({
             spreadsheetId,
-            range: `${sheetName}!C2:D`, // Ajusta este rango según sea necesario
+            range: `${sheetName}!C2:D`, // Ajusta este rango según sea necesario hola
         });
 
         console.log('Response from Sheets API:', response.data);
