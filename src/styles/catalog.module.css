@@ -1,7 +1,6 @@
 /* catalog.module.css */
 @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600&display=swap');
 
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -11,11 +10,18 @@
     border: 2px solid black;
 }
 
+.username {
+    text-align: center;
+    font-size: 1.5em;
+    color: whitesmoke;
+    margin-bottom: 10px;
+}
+
 .pointsCounter {
-    font-size: 2rem;
-    font-weight: bold;
-    justify-self: flex-end;
-    font-family: 'Signika Negative', sans-serif;
+    text-align: center;
+    font-size: 1.5em;
+    color: whitesmoke;
+    margin-bottom: 10px;
 }
 
 .viewSwitcher button {
@@ -26,6 +32,7 @@
     cursor: pointer;
     width: 100%;
     margin-right: 50px;
+    margin-bottom: 5px;
     border: none;
     border-radius: 5%;
 }
@@ -50,7 +57,7 @@
     position: absolute;
     left: 0;
     margin-left: 10px;
-    margin-top: 3.7vw;
+    margin-top: 4.3vw;
 }
 
 .goBackBtn {
@@ -95,7 +102,7 @@
     animation: shine 6s linear infinite;
 }
 @keyframes shine {
-    to{
+    to {
         background-position: 200% center;
     }
 }
@@ -104,7 +111,7 @@
     padding: 20px;
 }
 
-.historyItem{
+.historyItem {
     border: 1px solid #ccc;
     padding: 10px;
     margin: 10px 0;
@@ -112,7 +119,7 @@
     background-color: #f9f9f9;
 }
 
-.catalogView{
+.catalogView {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around; /* Para centrar las tarjetas horizontalmente */
@@ -226,4 +233,100 @@
     font-weight: 600;
 }
 
+.errorMessage {
+    color: red;
+    font-size: 1.5em;
+    position: absolute;
+    top: 92%; /* Ubica el mensaje verticalmente en el centro del contenedor */
+    left: 50%; /* Ubica el mensaje horizontalmente en el centro del contenedor */
+    transform: translate(-50%, -100%); /* Ajusta el mensaje para que esté centrado sobre el botón */
+}
 
+.successMessage {
+    color: rgb(0, 255, 234);
+    font-size: 1.5em;
+    position: absolute;
+    top: 92%; /* Ubica el mensaje verticalmente en el centro del contenedor */
+    left: 50%; /* Ubica el mensaje horizontalmente en el centro del contenedor */
+    transform: translate(-50%, -100%); /* Ajusta el mensaje para que esté centrado sobre el botón */
+}
+
+/* History Styles */
+.historyTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.historyTable th,
+.historyTable td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+.historyTable th {
+    background-color: rgb(40, 188, 191);
+    color: white;
+}
+
+.historyTable tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.historyTable tr:hover {
+    background-color: #ddd;
+}
+
+/*Password*/
+.profileButton {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor en forma de mano */
+    margin-top: 20px; /* Espacio superior */
+}
+
+.profileForm {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.formGroup {
+    margin-bottom: 15px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.formGroup input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.submitButton {
+    background-color: #4CAF50; /* Color de fondo */
+    color: white; /* Color del texto */
+    padding: 10px 20px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor en forma de mano */
+}
+
+.errorMessage2 {
+    color: red;
+    margin-top: 10px;
+}
+
+.successMessage2 {
+    color: green;
+    margin-top: 10px;
+}

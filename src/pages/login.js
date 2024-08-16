@@ -2,48 +2,41 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import styles from '../styles/login.module.css';
-import { useGoogleLogin } from '@react-oauth/google';
-import { loadClient } from '@/lib/sheets'; // Importa la biblioteca
 
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
     const router = useRouter();
 
-    const handleGoogleLoginSuccess = async (tokenResponse) => {
-        const { code } = tokenResponse;
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
         try {
-            const response = await fetch('/api/exchange-token', {
+            const response = await fetch('/api/authenticate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ code }),
+                body: JSON.stringify({ username, password }),
             });
+
+            if (!response.ok) {
+                throw new Error('Invalid username or password');
+            }
+
             const data = await response.json();
-            const { access_token } = data;
-            // Usar el token de acceso para cargar el cliente
-            loadClient(access_token, '1MVKpqtcpIeiEuQxbyBMBsyixTLGWh08h1HmA9tDu5J8', 'Sheet1!C2:D1000');
+            console.log('Login response:', data);
+            
+            // Almacena el nombre de usuario en sessionStorage
+            sessionStorage.setItem('username', username);
+            
+            // Redirige a la página de catálogo
             router.push('/catalog');
         } catch (error) {
-            console.error('Error exchanging code for token', error);
+            console.error('Error during login:', error);
+            setErrorMessage('Invalid username or password'); // Mensaje de error
         }
-    };
-
-    const login = useGoogleLogin({
-        flow: 'auth-code',
-        onSuccess: handleGoogleLoginSuccess,
-        onError: (errorResponse) => {
-            console.error('Login failed:', errorResponse);
-        },
-        clientId: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-        redirectUri: process.env.NEXT_PUBLIC_GOOGLE_REDIRECT_URI,
-    });
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        await router.push('/catalog');
     };
 
     return (
@@ -75,8 +68,7 @@ export default function Login() {
                     required
                 />
                 <button type="submit">Log In</button>
-                <button type="button" onClick={() => login()}>Login with Google</button>
-                {error && <p className={styles.error}>{error}</p>}
+                {errorMessage && <p className={styles.errorMsg}>{errorMessage}</p>} {/*Muestra el mensaje de error si existe */}
                 <div className={styles.btnContainer}>
                     <a href="/" className={styles.goBackBtn}>Go back</a>
                 </div>
