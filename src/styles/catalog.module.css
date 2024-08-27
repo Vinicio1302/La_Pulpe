@@ -258,23 +258,20 @@
     width: 100%;
     border-collapse: collapse;
 }
-
 .historyTable th,
 .historyTable td {
     border: 1px solid #ccc;
     padding: 10px;
     text-align: left;
 }
-
 .historyTable th {
     background-color: rgb(40, 188, 191);
     color: white;
 }
-
-.historyTable tr:nth-child(even) {
-    background-color: #f2f2f2;
+/* Elimina el fondo alterno de las filas pares */
+.historyTable tr {
+    background-color: white;
 }
-
 .historyTable tr:hover {
     background-color: #ddd;
 }
